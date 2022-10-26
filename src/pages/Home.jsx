@@ -17,9 +17,13 @@ export const Home = () => {
   }, [])
 
   const pokeApi = () => {
+    var endpoints = []
+    for (var i = 1; i <= 50; i++) {
+      endpoints.push(`https://pokeapi.co/api/v2/pokemon/${i}/`)
+    }
     axios
-      .get('https://pokeapi.co/api/v2/pokemon?limit=50')
-      .then((res) => setPokemons(res.data.results))
+      .all(endpoints.map((endpoint) => axios.get(endpoint)))
+      .then((res) => setPokemons(res))
       .catch((error) => console.log(error))
   }
 
@@ -30,7 +34,10 @@ export const Home = () => {
         <Grid container spacing={2}>
           {pokemons.map((pokemon, key) => (
             <Grid item xs={3} key={key}>
-              <CardPokemon name={pokemon.name} />
+              <CardPokemon
+                name={pokemon.data.name}
+                image={pokemon.data.sprites.front_default}
+              />
             </Grid>
           ))}
         </Grid>

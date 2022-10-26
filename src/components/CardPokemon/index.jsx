@@ -5,7 +5,14 @@ import CardMedia from '@mui/material/CardMedia'
 import Typography from '@mui/material/Typography'
 import { Button, CardActionArea, CardActions } from '@mui/material'
 
-export default function CardPokemon({ name, image }) {
+export default function CardPokemon({ name, image, types }) {
+  const typePokemon = () => {
+    if (types[1]) {
+      return types[0].type.name + '|' + types[1].type.name
+    }
+    return types[0].type.name
+  }
+
   return (
     <Card sx={{ maxWidth: 345 }}>
       <CardActionArea>
@@ -14,7 +21,9 @@ export default function CardPokemon({ name, image }) {
           <Typography gutterBottom variant="h5" component="div">
             {name}
           </Typography>
-          <Typography variant="body2" color="text.secondary"></Typography>
+          <Typography variant="body2" color="text.secondary">
+            {typePokemon()}
+          </Typography>
         </CardContent>
       </CardActionArea>
       <CardActions>

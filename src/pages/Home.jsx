@@ -27,9 +27,22 @@ export const Home = () => {
       .catch((error) => console.log(error))
   }
 
+  const pokemonFilter = (name) => {
+    var filteredPokemons = []
+    if (name === '') {
+      pokeApi()
+    }
+    for (var i in pokemons) {
+      if (pokemons[i].data.name.includes(name)) {
+        filteredPokemons.push(pokemons[i])
+      }
+    }
+    setPokemons(filteredPokemons)
+  }
+
   return (
     <div>
-      <Navbar />
+      <Navbar pokemonFilter={pokemonFilter} />
       <Container maxWidth="false">
         <Grid container spacing={2}>
           {pokemons.map((pokemon, key) => (
@@ -37,6 +50,7 @@ export const Home = () => {
               <CardPokemon
                 name={pokemon.data.name}
                 image={pokemon.data.sprites.front_default}
+                types={pokemon.data.types}
               />
             </Grid>
           ))}

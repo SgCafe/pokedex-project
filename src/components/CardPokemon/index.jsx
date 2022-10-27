@@ -3,7 +3,7 @@ import Card from '@mui/material/Card'
 import CardContent from '@mui/material/CardContent'
 import CardMedia from '@mui/material/CardMedia'
 import Typography from '@mui/material/Typography'
-import { Button, CardActionArea, CardActions } from '@mui/material'
+import { Box, Button, CardActionArea, CardActions } from '@mui/material'
 
 export default function CardPokemon({ name, image, types }) {
   const typePokemon = () => {
@@ -18,12 +18,18 @@ export default function CardPokemon({ name, image, types }) {
       <CardActionArea>
         <CardMedia component="img" height="200" image={image} alt="" />
         <CardContent>
-          <Typography gutterBottom variant="h5" component="div">
-            {name}
-          </Typography>
-          <Typography variant="body2" color="text.secondary">
-            {typePokemon()}
-          </Typography>
+          <Box
+            display="flex"
+            justifyContent="space-between"
+            alignItems="center"
+          >
+            <Typography gutterBottom variant="h5" component="div">
+              {name}
+            </Typography>
+            <Typography variant="body2" color="text.secondary">
+              {typePokemon()}
+            </Typography>
+          </Box>
         </CardContent>
       </CardActionArea>
       <CardActions>
